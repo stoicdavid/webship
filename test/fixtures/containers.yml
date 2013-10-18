@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  plate: MyString
+  economic: 1
+  type: 
+  color: MyString
+  features: MyString
+
+two:
+  plate: MyString
+  economic: 1
+  type: 
+  color: MyString
+  features: MyString

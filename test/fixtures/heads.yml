@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  placas: MyString
+  economico: 1
+  brand: MyString
+  color: MyString
+  year: 1
+
+two:
+  placas: MyString
+  economico: 1
+  brand: MyString
+  color: MyString
+  year: 1

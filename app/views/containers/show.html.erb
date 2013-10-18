@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Plate:</strong>
+  <%= @container.plate %>
+</p>
+
+<p>
+  <strong>Economic:</strong>
+  <%= @container.economic %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @container.type %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @container.color %>
+</p>
+
+<p>
+  <strong>Features:</strong>
+  <%= @container.features %>
+</p>
+
+<%= link_to 'Edit', edit_container_path(@container) %> |
+<%= link_to 'Back', containers_path %>

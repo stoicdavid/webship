@@ -1,0 +1,38 @@
+<%= simple_form_for(@service) do |f| %>
+  <% if @service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+      <% @service.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shipment %><br>
+    <%= f.text_field :shipment %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_date %><br>
+    <%= f.datetime_select :departure_date %>
+  </div>
+ 
+  <div class="field">
+
+    <%= f.association :head, label_method: :economic, value_method: :id, include_blank: true %>
+  </div>
+  <div class="field">
+
+    <%= f.input :departure_id, collection: Location.all %>
+  </div>
+  <div class="field">
+
+    <%= f.input :arrival_id, collection: Location.all %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

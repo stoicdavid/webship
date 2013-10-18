@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Shipment:</strong>
+  <%= @service.shipment %>
+</p>
+
+<p>
+  <strong>Departure date:</strong>
+  <%= @service.departure_date %>
+</p>
+
+<p>
+  <strong>Arrival date:</strong>
+  <%= @service.arrival_date %>
+</p>
+
+<p>
+  <strong>Release date:</strong>
+  <%= @service.release_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @service.status %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @service.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @service.longitude %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @service.location_id %>
+</p>
+
+<p>
+  <strong>Head:</strong>
+  <%= @service.head_id %>
+</p>
+
+<p>
+  <strong>Departure:</strong>
+  <%= @service.departure_id %>
+</p>
+
+<p>
+  <strong>Arrival:</strong>
+  <%= @service.arrival_id %>
+</p>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back', services_path %>

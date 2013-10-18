@@ -1,0 +1,54 @@
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <h1>Marketing stuff!</h1>
+  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+  <p><a class="btn btn-lg btn-success" href="#">Get started today</a></p>
+</div>
+
+<h1>Listing services</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Shipment</th>
+      <th>Departure date</th>
+      <th>Arrival date</th>
+      <th>Release date</th>
+      <th>Status</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Location</th>
+      <th>Head</th>
+      <th>Departure</th>
+      <th>Arrival</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%= service.shipment %></td>
+        <td><%= service.departure_date %></td>
+        <td><%= service.arrival_date %></td>
+        <td><%= service.release_date %></td>
+        <td><%= service.status %></td>
+        <td><%= service.latitude %></td>
+        <td><%= service.longitude %></td>
+        <td><%= service.location_id %></td>
+        <td><%= service.head_id %></td>
+        <td><%= service.departure_id %></td>
+        <td><%= service.arrival_id %></td>
+        <td><%= link_to 'Show', service %></td>
+        <td><%= link_to 'Edit', edit_service_path(service) %></td>
+        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Service', new_service_path %>

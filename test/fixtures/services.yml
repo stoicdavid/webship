@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipment: MyString
+  departure_date: 2013-10-14 02:03:09
+  arrival_date: 2013-10-14 02:03:09
+  release_date: 2013-10-14 02:03:09
+  status: 1
+  latitude: 1.5
+  longitude: 1.5
+  location_id: 1
+  head_id: 1
+  departure_id: MyString
+  arrival_id: MyString
+
+two:
+  shipment: MyString
+  departure_date: 2013-10-14 02:03:09
+  arrival_date: 2013-10-14 02:03:09
+  release_date: 2013-10-14 02:03:09
+  status: 1
+  latitude: 1.5
+  longitude: 1.5
+  location_id: 1
+  head_id: 1
+  departure_id: MyString
+  arrival_id: MyString

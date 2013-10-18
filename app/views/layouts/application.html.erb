@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webship</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+ <div class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+     <a class="navbar-brand" href="#">Control Logistico</a>
+   </div>
+   <div class="navbar-collapse collapse">
+     <ul class="nav navbar-nav">
+       <li class=""><a href="/">Home</a></li>
+       
+     </ul>
+     <ul class="nav navbar-nav navbar-right"> 
+		 <% if user_signed_in? %>
+		 <li class="active">
+			<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+				<span class="user-info">
+					Hola 
+					<strong><%= current_user.email %></strong>
+				</span>
+				<b class="caret"></b>
+			</a>
+			<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				<li><%= link_to ' Edit profile', edit_user_registration_path,:class => " glyphicon glyphicon-user" %></li>
+				<li class="divider"></li>
+				<li><%= link_to " Logout", destroy_user_session_path, method: :delete,:class => "glyphicon glyphicon-log-out" %></li>
+			</ul>
+		</li>
+ 		<% else %>
+			<li><%= link_to " Login", new_user_session_path %></li>
+			<li><%= link_to "Sign up", new_user_registration_path %></li>
+		<% end %>
+     </ul>
+   </div><!--/.nav-collapse -->
+ </div>
+  </div>
+
+		  <div class="container">	      
+<h1>
+<p> &nbsp;</p>
+</h1>
+
+   	   	<% flash.each do |name, msg| %>
+   	   	  <div class="alert alert-<%= name == :notice ? "success" : "danger" %>">
+   	   	    <a class="close" data-dismiss="alert" aria-hidden="true">&times;</a>
+   	   	    <%= msg %>
+   	   	  </div>
+   	   	<% end %>
+
+
+<div class="row">
+   	   	  <%= yield %>
+</div>
+
+	      <!-- Site footer -->
+	      <div class="footer">
+	        <p>&copy; Control Logistico</p>
+	      </div>   
+		  	      </div>
+
+</body>
+</html>

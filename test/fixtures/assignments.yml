@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  service_id: MyString
+  container_id: MyString
+
+two:
+  service_id: MyString
+  container_id: MyString

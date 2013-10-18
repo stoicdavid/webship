@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Placas:</strong>
+  <%= @head.placas %>
+</p>
+
+<p>
+  <strong>Economico:</strong>
+  <%= @head.economico %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @head.brand %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @head.color %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @head.year %>
+</p>
+
+<%= link_to 'Edit', edit_head_path(@head) %> |
+<%= link_to 'Back', heads_path %>
