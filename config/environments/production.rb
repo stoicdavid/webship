@@ -28,7 +28,7 @@ Webship::Application.configure do
   
   config.assets.initialize_on_precompile = false
   
-  config.action_mailer.default_url_options = { :host => 'webship.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'http://webship.herokuapp.com' }
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
