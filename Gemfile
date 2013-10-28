@@ -40,6 +40,11 @@ gem 'country_select'
 
 gem "select2-rails"
 
+gem 'jquery-turbolinks'
+
+#maps
+gem 'polylines'
+
 #authentication and authorization
 gem 'devise'
 

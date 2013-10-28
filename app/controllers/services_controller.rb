@@ -12,6 +12,15 @@ class ServicesController < ApplicationController
   # GET /services/1
   # GET /services/1.json
   def show
+    @service = Service.find(params[:id])
+   
+
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { 
+              render :json => @service.to_json(:methods => [:polyline],:only => [:shipment]) 
+            }
+        end
   end
 
   # GET /services/new
@@ -71,6 +80,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude, :location_id, :head_id, :departure_id, :arrival_id)
+      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude,:latitude_dest, :longitude_dest, :location_id, :head_id, :departure_id, :arrival_id)
     end
 end

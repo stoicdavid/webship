@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131016125316) do
+ActiveRecord::Schema.define(version: 20131028072414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20131016125316) do
 
   create_table "containers", force: true do |t|
     t.string   "plate"
-    t.integer  "economic"
+    t.string   "economic",   limit: 80
     t.string   "type"
     t.string   "color"
     t.string   "features"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20131016125316) do
 
   create_table "heads", force: true do |t|
     t.string   "plate"
-    t.integer  "economic"
+    t.string   "economic",   limit: 80
     t.string   "brand"
     t.string   "color"
     t.integer  "year"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 20131016125316) do
     t.integer  "arrival_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude_des"
+    t.float    "longitude_dest"
   end
 
   add_index "services", ["head_id"], name: "index_services_on_head_id", using: :btree

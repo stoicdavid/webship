@@ -32,6 +32,28 @@
 
     <%= f.input :arrival_id, collection: Location.all %>
   </div>
+  
+    <h2>Origen</h2>
+  <div class="field">
+
+    <%= f.input :latitude%>
+  </div>
+  <div class="field">
+
+    <%= f.input :longitude%>
+  </div>
+  
+  <h2>Destino</h2>
+  
+  <div class="field">
+
+    <%= f.input :latitude_dest%>
+  </div>
+  <div class="field">
+
+    <%= f.input :longitude_dest%>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

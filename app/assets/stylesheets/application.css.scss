@@ -12,5 +12,11 @@
  *= require_self
  *= require_tree .
  *= require select2
+ *= require gmaps4rails
  */
+.element {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
 @import "twitter/bootstrap";
