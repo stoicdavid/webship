@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028150837) do
+ActiveRecord::Schema.define(version: 20131115190021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20131028150837) do
 
   create_table "containers", force: true do |t|
     t.string   "plate"
-    t.string   "economic",   limit: 80
+    t.integer  "economic"
     t.string   "type"
     t.string   "color"
     t.string   "features"
@@ -71,6 +71,13 @@ ActiveRecord::Schema.define(version: 20131028150837) do
   end
 
   add_index "containers", ["line_id"], name: "index_containers_on_line_id", using: :btree
+
+  create_table "devices", force: true do |t|
+    t.string   "brand"
+    t.string   "key",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "districts", force: true do |t|
     t.integer  "state_id"
@@ -83,7 +90,7 @@ ActiveRecord::Schema.define(version: 20131028150837) do
 
   create_table "heads", force: true do |t|
     t.string   "plate"
-    t.string   "economic",   limit: 80
+    t.integer  "economic"
     t.string   "brand"
     t.string   "color"
     t.integer  "year"
@@ -124,18 +131,18 @@ ActiveRecord::Schema.define(version: 20131028150837) do
     t.integer  "status"
     t.float    "latitude"
     t.float    "longitude"
-    t.integer  "location_id"
-    t.integer  "head_id"
+    t.integer  "vehicle_id"
     t.integer  "departure_id"
     t.integer  "arrival_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "latitude_dest"
     t.float    "longitude_dest"
+    t.integer  "device_id"
   end
 
-  add_index "services", ["head_id"], name: "index_services_on_head_id", using: :btree
-  add_index "services", ["location_id"], name: "index_services_on_location_id", using: :btree
+  add_index "services", ["device_id"], name: "index_services_on_device_id", using: :btree
+  add_index "services", ["vehicle_id"], name: "index_services_on_vehicle_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "name"
@@ -166,5 +173,21 @@ ActiveRecord::Schema.define(version: 20131028150837) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vehicles", force: true do |t|
+    t.string   "plate"
+    t.string   "economic"
+    t.string   "container_type"
+    t.string   "color"
+    t.string   "features"
+    t.string   "brand"
+    t.integer  "year"
+    t.integer  "vehicle_type",   default: 1
+    t.integer  "line_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicles", ["line_id"], name: "index_vehicles_on_line_id", using: :btree
 
 end

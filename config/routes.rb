@@ -9,7 +9,7 @@ Webship::Application.routes.draw do
 
   resources :containers
 
-  resources :heads
+  resources :vehicles
 
   resources :locations
   

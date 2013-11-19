@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $('#service_head_id').select2({
+  $('#service_vehicle_id').select2({
                 placeholder: "ingresa economico",
                 allowClear: true
   })
@@ -38,3 +38,7 @@ display_on_map = (data,map) ->
 $ ->
   map = gm_init()
   load_track(js_track_id,map)  
+jQuery ->
+	$('#service_departure_date').datetimepicker({
+        language: 'es',
+    })

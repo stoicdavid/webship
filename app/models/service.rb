@@ -1,6 +1,10 @@
 class Service < ActiveRecord::Base
-  has_many :containers, :through  => :assignments
-  belongs_to :head
+
+  belongs_to :vehicle
+  belongs_to :device
+  accepts_nested_attributes_for :vehicle, :allow_destroy => true
+  
+  
   
   def polyline_points
     [[self.latitude,self.longitude],[self.latitude_dest,self.longitude_dest]]

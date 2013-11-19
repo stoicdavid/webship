@@ -1,4 +1,4 @@
-<%= simple_form_for(@service) do |f| %>
+<%= simple_form_for(@service, html: {:class =>''}) do |f| %>
   <% if @service.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -10,51 +10,52 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :shipment %><br>
-    <%= f.text_field :shipment %>
+  <div class="form-group">
+  <div class="col-xs-2">
+    <%= f.input :shipment,  as: :integer %>
   </div>
-  <div class="field">
-    <%= f.label :departure_date %><br>
-    <%= f.datetime_select :departure_date %>
+  </div>  
+  <div class="col-xs-2">
+
+    <%= f.input :departure_date, as: :datetime_picker %>
   </div>
  
   <div class="field">
 
-    <%= f.association :head, label_method: :economic, value_method: :id, include_blank: true %>
-  </div>
-  <div class="field">
-
-    <%= f.input :departure_id, collection: Location.all %>
-  </div>
-  <div class="field">
-
-    <%= f.input :arrival_id, collection: Location.all %>
+    <%= f.association :vehicle, label_method: :economic, value_method: :id, include_blank: true %>
   </div>
   
     <h2>Origen</h2>
   <div class="field">
 
-    <%= f.input :latitude%>
+    <%= f.input :departure_id, collection: Location.all %>
+  </div>
+  
+  <div class="field">
+
+    <%= f.input :latitude, as: :float%>
   </div>
   <div class="field">
 
-    <%= f.input :longitude%>
+    <%= f.input :longitude, as: :float%>
   </div>
-  
   <h2>Destino</h2>
+  <div class="field">
+
+    <%= f.input :arrival_id, collection: Location.all %>
+  </div>
   
   <div class="field">
 
-    <%= f.input :latitude_dest%>
+    <%= f.input :latitude_dest, as: :float%>
   </div>
   <div class="field">
 
-    <%= f.input :longitude_dest%>
+    <%= f.input :longitude_dest, as: :float%>
   </div>
   
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

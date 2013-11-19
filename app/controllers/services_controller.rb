@@ -80,6 +80,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude,:latitude_dest, :longitude_dest, :location_id, :head_id, :departure_id, :arrival_id)
+      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude,:latitude_dest, :longitude_dest, :location_id, :departure_id, :arrival_id,:vehicle_attributes)
     end
 end
