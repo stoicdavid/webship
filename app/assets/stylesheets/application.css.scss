@@ -10,14 +10,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  *= require select2
  *= require gmaps4rails
  *= require bootstrap-datetimepicker
+ *= require_tree .
  */
-.element {
-  -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
-}
+
 @import "twitter/bootstrap";
+

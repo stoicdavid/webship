@@ -22,4 +22,16 @@ ActiveAdmin.register AdminUser do
       params.permit admin_user: [:email, :password, :password_confirmation]
     end
   end
+  show do
+      attributes_table do
+        row :email
+        row :authentication_token
+        row :confirmed_at
+        row :current_sign_in_at
+        row :last_sign_in_at
+        row :sign_in_count
+      end
+      active_admin_comments
+    end
+  
 end

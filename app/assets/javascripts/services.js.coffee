@@ -16,6 +16,10 @@ jQuery ->
 	          placeholder: "ingresa destino",
 	          allowClear: true
   })
+
+  $('#service_departure_date').datetimepicker({
+
+    });
 	      
 gm_init = ->
   gm_center = new google.maps.LatLng(19, -99)
@@ -37,8 +41,8 @@ display_on_map = (data,map) ->
   
 $ ->
   map = gm_init()
-  load_track(js_track_id,map)  
-jQuery ->
-	$('#service_departure_date').datetimepicker({
-        language: 'es',
-    })
+  load_track(js_track_id,map)
+  
+
+  
+      

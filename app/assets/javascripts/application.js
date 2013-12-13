@@ -17,5 +17,7 @@
 //= require twitter/bootstrap
 //= require select2
 //= require select2_locale_es
-//= require bootstrap-datetimepicker
+//= require bootstrap-datetimepicker/core
+//= require bootstrap-datetimepicker/pickers
+//= require bootstrap-datetimepicker/locales/bootstrap-datetimepicker.es.js
 //= require_tree .

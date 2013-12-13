@@ -10,15 +10,12 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">
-  <div class="col-xs-2">
-    <%= f.input :shipment,  as: :integer %>
-  </div>
-  </div>  
-  <div class="col-xs-2">
 
-    <%= f.input :departure_date, as: :datetime_picker %>
-  </div>
+
+    <%= f.input :shipment,  as: :integer, input_html: {class:'form-control'} %>
+
+    <%= f.input :departure_date, as: :datetime_picker, input_html: {class:'form-control'} %>
+
  
   <div class="field">
 

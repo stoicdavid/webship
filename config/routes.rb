@@ -13,6 +13,15 @@ Webship::Application.routes.draw do
 
   resources :locations
   
+  namespace :api do
+    namespace :v1 do
+      devise_scope :user do
+        post 'registrations' => 'registrations#create', :as => 'register'
+        post 'sessions' => 'sessions#create', :as => 'login'
+        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+      end
+    end
+  end
   
 
   # The priority is based upon order of creation: first created -> highest priority.
