@@ -21,6 +21,6 @@ module Webship
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :es
 
-    config.assets.paths << Rails.root.join("app", "vendor", "assets", "images", "font")
+    config.assets.paths << Rails.root.join( "vendor", "app","assets", "images", "font")
   end
 end
