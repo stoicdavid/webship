@@ -10,14 +10,18 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require wysihtml5-0.3.0
+
 //= require jquery
-//= require jquery.turbolinks
+// require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
-//= require twitter/bootstrap
 //= require select2
 //= require select2_locale_es
-//= require bootstrap-datetimepicker/core
-//= require bootstrap-datetimepicker/pickers
-//= require bootstrap-datetimepicker/locales/bootstrap-datetimepicker.es.js
-//= require_tree .
+//= require bootstrap
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/es
+//= require locales/bootstrap-datetimepicker.es
+//= require fuelux.wizard
+//= require theme
+// require turbolinks

@@ -1,6 +1,8 @@
-<%= simple_form_for(@service, html: {:class =>''}) do |f| %>
+<%= simple_form_for(@service, html: {:id=>'pad-wrapper',:class =>'form-page'},defaults: { wrapper_html: { class: 'field-box' } }) do |f| %>
+<div class="row form-wrapper">
+	<div class="col-md-7 column">
   <% if @service.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
 
       <ul>
@@ -11,48 +13,52 @@
     </div>
   <% end %>
 
-
-    <%= f.input :shipment,  as: :integer, input_html: {class:'form-control'} %>
-
-    <%= f.input :departure_date, as: :datetime_picker, input_html: {class:'form-control'} %>
-
- 
-  <div class="field">
-
+	<div class"col-md-7">
+		<%= f.input :shipment,  as: :integer, input_html: {class:'inline-input'} %>
+	</div>
+    <%= f.input :departure_date,:as => :datetime_picker,input_html: {class:'form-control'} %>
+	
+	
+	<script type="text/javascript">
+	            $(function () {
+	                $('#service_departure_date1').datetimepicker();
+	            });
+	        </script>
     <%= f.association :vehicle, label_method: :economic, value_method: :id, include_blank: true %>
-  </div>
   
     <h2>Origen</h2>
-  <div class="field">
 
     <%= f.input :departure_id, collection: Location.all %>
-  </div>
-  
-  <div class="field">
-
     <%= f.input :latitude, as: :float%>
-  </div>
-  <div class="field">
-
     <%= f.input :longitude, as: :float%>
-  </div>
+
   <h2>Destino</h2>
-  <div class="field">
+
 
     <%= f.input :arrival_id, collection: Location.all %>
-  </div>
-  
-  <div class="field">
-
     <%= f.input :latitude_dest, as: :float%>
-  </div>
-  <div class="field">
-
     <%= f.input :longitude_dest, as: :float%>
-  </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.button :submit, class:'btn-flat' %>
   </div>
-
+  </div>
+</div>
 <% end %>
+<script type="text/javascript">
+    $(function () {
+
+        // add uniform plugin styles to html elements
+        $("input:checkbox, input:radio").uniform();
+
+        // select2 plugin for select elements
+        $(".select2").select2({
+            placeholder: "Select a State"
+        });
+
+        // datepicker plugin
+        $('.input-datepicker').datepicker().on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
+    });
+</script>

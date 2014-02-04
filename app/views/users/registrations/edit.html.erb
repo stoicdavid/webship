@@ -1,27 +1,113 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!-- main container .wide-content is used for this layout without sidebar :)  -->
+<div class="content wide-content">
+    <div class="settings-wrapper" id="pad-wrapper">
+        <div class="row">
+            <!-- avatar column -->
+            <div class="col-md-3 col-md-offset-1 avatar-box">
+                <div class="personal-image">
+                    <img src="/assets/personal-info.png" class="avatar img-circle" alt="avatar" />
+                    <p>Upload a different photo...</p>
+                    
+                    <input type="file" />
+                </div>
+            </div>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= f.error_notification %>
+            <!-- edit form column -->
+            <div class="col-md-7 personal-info">
+                <div class="alert alert-info">
+                    <i class="icon-lightbulb"></i>
+                    This page shows an example of an alternative layout with the main navbar on the top
+                    <br> using <strong>.content.wide-content</strong> for this main container
+                </div>
+                <h5 class="personal-title">Mi información personal</h5>
 
-  <div class="form-inputs">
-    <%= f.input :email, :required => true, :autofocus => true %>
+				<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put,class:"form-horizontal" }) do |f| %>
+				  <%= f.error_notification %>
+				    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+				      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+				    <% end %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
 
-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-    <%= f.input :password_confirmation, :required => false %>
-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
-  </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">First name:</label>
+                        <div class="col-lg-8">
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
+                            <input class="form-control" type="text" value="Alejandra" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Last name:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="Galvan" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Company:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="Design Co." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* Email:</label>
+                        <div class="col-lg-8">
+						<%= f.input :email, :required => true,label:false, :autofocus => true,input_html:{class:"form-control"} %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Time Zone:</label>
+                        <div class="col-lg-8">
+                            <div class="ui-select">
+                                <select id="user_time_zone" name="user[time_zone]">
+                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                                    <option value="Alaska">(GMT-09:00) Alaska</option>
+                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                                    <option value="Arizona">(GMT-07:00) Arizona</option>
+                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+					
 
-<h3>Cancel my account</h3>
+				    
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Password:</label>
+                        <div class="col-lg-8">
+							<%= f.input :password, :autocomplete => "off",label:false,placeholder: "leave it blank if you don't want to change it", :required => false,input_html: {class:"form-control"} %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Confirm password:</label>
+                        <div class="col-lg-8">
+							<%= f.input :password_confirmation,label:false, :required => false,input_html:{class:"form-control"} %>
+                        </div>
+                    </div>
+					
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">* Current Password:</label>
+                        <div class="col-lg-8">
+				    <%= f.input :current_password, label:false,placeholder: "we need your current password to confirm your changes", :required => true,input_html:{class:"form-control"} %>												
+                        </div>
+                    </div>
+					
 
-<%= link_to "Back", :back %>
+
+					
+                    <div class="actions">
+	  				    <%= f.button :submit, "Actualizar",class:"btn-glow primary" %>
+                        <span>O</span>
+<%= link_to "Cancelar Cuenta", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete,class:"reset" %>
+                    </div>
+                </form>
+								<% end %>
+								  				<%= link_to "Back", :back %>
+            </div>
+        </div>            
+    </div>
+</div>
+<!-- end main container -->
+

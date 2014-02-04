@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.0.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -27,24 +27,24 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+gem 'rabl'
 
 #twitter bootstrap
-gem 'anjlab-bootstrap-rails', '~> 3.0.2.0', :require => 'bootstrap-rails'
+gem 'bootstrap-sass'
 
 #deal with forms                              
 gem 'simple_form'
 
-# SORRY! But the 'datetimepicker-rails' name in RubyGems repo already taken.
-gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 
 gem 'country_select'
 
 gem "select2-rails"
-
-gem 'jquery-turbolinks'
 
 #maps
 gem 'polylines'

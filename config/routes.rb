@@ -13,13 +13,14 @@ Webship::Application.routes.draw do
 
   resources :locations
   
-  namespace :api do
+  namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       devise_scope :user do
         post 'registrations' => 'registrations#create', :as => 'register'
         post 'sessions' => 'sessions#create', :as => 'login'
         delete 'sessions' => 'sessions#destroy', :as => 'logout'
       end
+        get 'services' => 'services#index', :as => 'services'
     end
   end
   

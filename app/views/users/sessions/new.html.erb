@@ -1,16 +1,28 @@
+<html class="login-bg">
 
-<div class="container">
-	<div class="col-md-4 col-md-offset-4">
-		<h2 class="form-signin-heading">Sign in</h2>
-		<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-		    <%= f.input :email, :required => false, :autofocus => true,:input_html => { :class => "form-control" } %>
-		    <%= f.input :password, :required => false,:input_html => { :class => "form-control" } %>
-		    <%= f.input :remember_me, label: false , inline_label: 'Remember me', :as => :boolean if devise_mapping.rememberable? %>
-		    <%= f.button :submit, "Sign in", :class => "btn btn-lg btn-primary btn-block"   %>
-		<% end %>
-		<%= render "users/shared/links" %>
+	<div class="login-wrapper">
+	    <a href="index.html">
+	        <img class="logo" src="/assets/logo-white.png" alt="logo" />
+	    </a>
+
+	    <div class="box">
+	        <div class="content-wrap">
+	            <h6>Log in</h6>
+				<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+				    <%= f.input :email, :required => false, :autofocus => true,:input_html => { :class => "form-control" } %>
+				    <%= f.input :password, :required => false,:input_html => { :class => "form-control" } %>
+					<div class="remember">
+						<%= f.input :remember_me, label: false , inline_label: 'Remember me', :as => :boolean if devise_mapping.rememberable? %>
+					</div>
+				    <%= f.button :submit, "Log in", :class => "btn-glow primary login"   %>
+				<% end %>
+	            <a href="#" class="forgot">Forgot password?</a>
+	        </div>
+	    </div>
+
+	    <div class="no-account">
+	        <p>Don't have an account?</p>
+			<%= render "users/shared/links" %>
+	    </div>
 	</div>
-</div>
-
-
-
+</html>

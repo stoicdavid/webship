@@ -17,7 +17,10 @@ module Webship
     config.time_zone = 'Mexico City'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    I18n.config.enforce_available_locales = false
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :es
+
+    config.assets.paths << Rails.root.join("app", "vendor", "assets", "images", "font")
   end
 end

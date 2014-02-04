@@ -5,22 +5,21 @@ jQuery ->
   $('#service_vehicle_id').select2({
                 placeholder: "ingresa economico",
                 allowClear: true
-  })
+  });
 
   $('#service_departure_id').select2({
           placeholder: "ingresa el origen",
           allowClear: true
-  })
+  });
   
   $('#service_arrival_id').select2({
 	          placeholder: "ingresa destino",
 	          allowClear: true
-  })
+  });
 
-  $('#service_departure_date').datetimepicker({
-
-    });
-	      
+  
+  
+  
 gm_init = ->
   gm_center = new google.maps.LatLng(19, -99)
   gm_map_type = google.maps.MapTypeId.ROADMAP
