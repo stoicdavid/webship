@@ -22,7 +22,7 @@ module Webship
     config.i18n.default_locale = :es
 
     config.assets.precompile << Proc.new { |path|
-      if path =~ /\.(css|js)\z/
+      if path =~ /\.(css|js|png|jpg|jpeg|gif|eot|svg|ttf|woff)\z/
         full_path = Rails.application.assets.resolve(path).to_path
         app_assets_path = Rails.root.join('app', 'assets').to_path
         vendor_assets_path = Rails.root.join('vendor', 'assets').to_path
@@ -37,5 +37,6 @@ module Webship
         false
       end
     }
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end
