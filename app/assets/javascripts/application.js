@@ -24,4 +24,5 @@
 //= require locales/bootstrap-datetimepicker.es
 //= require fuelux.wizard
 //= require theme
+//= require jquery_nested_form
 // require turbolinks

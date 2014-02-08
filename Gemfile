@@ -56,7 +56,7 @@ gem "cancan"
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 
-
+gem "nested_form"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

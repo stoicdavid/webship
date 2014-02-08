@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216061035) do
+ActiveRecord::Schema.define(version: 20140208063502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20131216061035) do
     t.integer  "device_id"
     t.integer  "user_id"
     t.boolean  "completed"
+    t.integer  "service_type"
   end
 
   add_index "services", ["device_id"], name: "index_services_on_device_id", using: :btree
@@ -190,6 +191,7 @@ ActiveRecord::Schema.define(version: 20131216061035) do
     t.integer  "line_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "service_id"
   end
 
   add_index "vehicles", ["line_id"], name: "index_vehicles_on_line_id", using: :btree

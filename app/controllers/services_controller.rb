@@ -26,10 +26,12 @@ class ServicesController < ApplicationController
   # GET /services/new
   def new
     @service = Service.new
+    @service.vehicles.build
   end
 
   # GET /services/1/edit
   def edit
+    
   end
 
   # POST /services
@@ -80,14 +82,14 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude,:latitude_dest, :longitude_dest, :location_id, :departure_id, :arrival_id,:vehicle_attributes,:completed,:user_id)
-    end
-    def authenticate_user_from_token!
-        user_token = params[:user_token].presence
-        user       = user_token && User.find_by_authentication_token(user_token.to_s)
- 
-        if user
-          # Notice we are passing store false, so the user is not
+      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude,:latitude_dest, :longitude_dest, :location_id, :departure_id, :arrival_id,:completed,:user_id,:service_type,vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type])
+    end                                                                                                                                                                                                                       
+    def authenticate_user_from_token!                                                                                                                                                                                         
+        user_token = params[:user_token].presence                                                                                                                                                                             
+        user       = user_token && User.find_by_authentication_token(user_token.to_s)                                                                                                                                         
+                                                                                                                                                                                                                              
+        if user                                                                                                                                                                                                               
+          # Notice we are passing store false, so the user is not                                                                                                                                                              
           # actually stored in the session and a token is needed
           # for every request. If you want the token to work as a
           # sign in token, you can simply remove store: false.

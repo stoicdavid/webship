@@ -1,4 +1,4 @@
-<%= simple_form_for(@service, html: {:id=>'pad-wrapper',:class =>'form-page'},defaults: { wrapper_html: { class: 'field-box' } }) do |f| %>
+<%= simple_nested_form_for(@service, html: {:id=>'pad-wrapper',:class =>'form-page'},defaults: { wrapper_html: { class: 'field-box' } }) do |f| %>
 <div class="row form-wrapper">
 	<div class="col-md-7 column">
   <% if @service.errors.any? %>
@@ -14,18 +14,48 @@
   <% end %>
 
 	<div class"col-md-7">
-		<%= f.input :shipment,  as: :integer, input_html: {class:'inline-input'} %>
+		<%= f.input :shipment,  as: :integer, input_html: {class:'form-control'} %>
+		
+        <div class="field-box">
+            <label>Tipo de Servicio</label>
+            <div class="col-md-4">
+                <label class="radio">
+					<%= f.collection_radio_buttons :service_type, [[0, ' Sencillo'] ,[1, ' Doble']], :first, :last %>
+                 
+                </label>
+
+            </div>                                
+        </div>
+		
+		
 	</div>
-    <%= f.input :departure_date,:as => :datetime_picker,input_html: {class:'form-control'} %>
+		
+	
+   	 	<%= f.input :departure_date,:as => :datetime_picker,input_html: {class:'form-control'} %>
 	
 	
 	<script type="text/javascript">
-	            $(function () {
-	                $('#service_departure_date1').datetimepicker();
-	            });
-	        </script>
-    <%= f.association :vehicle, label_method: :economic, value_method: :id, include_blank: true %>
-  
+	    $(function () {
+	        $('#service_departure_date1').datetimepicker();
+	    });
+	</script>
+<h3>Vehículos</h3>
+
+		<%= f.simple_fields_for :vehicles,defaults:{ input_html: {class:'form-control'},wrapper_html:{class:'field-box'}} do |v| %>
+		<div class="well">
+			<%= v.input :plate %>
+			<%= v.input :economic %>
+			<%= v.input :container_type %>
+			<%= v.input :color %>
+			<%= v.input :features %>
+			<%= v.input :brand %>
+			<%= v.input :year %>				
+			<%= v.input :vehicle_type %>	
+			<%= v.link_to_remove "Eliminar vehículo" %>
+		<% end %>
+</div>		
+			<%= f.link_to_add "Agregar vehìculo",:vehicles %>								
+
     <h2>Origen</h2>
 
     <%= f.input :departure_id, collection: Location.all %>
