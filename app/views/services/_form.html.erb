@@ -56,18 +56,24 @@
 </div>		
 			<%= f.link_to_add "Agregar vehìculo",:vehicles %>								
 
-    <h2>Origen</h2>
-
-    <%= f.input :departure_id, collection: Location.all %>
-    <%= f.input :latitude, as: :float%>
-    <%= f.input :longitude, as: :float%>
-
-  <h2>Destino</h2>
 
 
-    <%= f.input :arrival_id, collection: Location.all %>
-    <%= f.input :latitude_dest, as: :float%>
-    <%= f.input :longitude_dest, as: :float%>
+	<%= f.simple_fields_for :locations,defaults:{ input_html: {class:'form-control'},wrapper_html:{class:'field-box'}} do |l| %>
+	<div class="panel panel-default">
+		<h3>
+		ORIGEN
+	</h3>
+		<%= l.input :cedis %>
+		<%= l.link_to_remove "Eliminar cedis" %>
+		<h3>
+		DESTINO
+	</h3>
+
+		<%= l.input :cedis %>
+		<%= l.link_to_remove "Eliminar cedis" %>
+	</div>
+	<% end %>
+
   
   <div class="actions">
     <%= f.button :submit, class:'btn-flat' %>

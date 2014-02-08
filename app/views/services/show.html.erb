@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<h4>
+  <strong>Shipment:</strong>
+  <%= @service.shipment %>
+</h4>
+
+
+
 <div class="row">
     <div class="col-md-12 col-xs-12">
         <div id="fuelux-wizard" class="wizard row">
@@ -7,6 +14,7 @@
                 <li data-target="#step1" class="active">
                     <span class="step">1</span>
                     <span class="title">Salida de <br> Origen</span>
+
                 </li>
                 <li data-target="#step2">
                     <span class="step">2</span>
@@ -24,18 +32,177 @@
         </div>
         <div class="step-content">
             <div class="step-pane active" id="step1">
-                <%= image_tag "carga_cajas.png" %>
 
+				<div class="row">					
+			        <div class="col-lg-2">
+						<%= image_tag "carga_cajas.png" %>
+
+			        </div><!-- /.col-lg-4 -->
+			        <div class="col-lg-3">
+						<div class="panel panel-default">
+						  <div class="panel-body">
+							  <%= image_tag "icon_checklist.png"%>
+								<p>
+								<strong>Departure date:</strong>
+								<%= @service.departure_date %>
+								<p>
+								<strong>Origen:</strong>
+								</p>
+								<p>
+								<strong>Destino:</strong>
+								</p>
+
+
+	  						</div>
+  						</div>
+			        </div><!-- /.col-lg-4 -->
+			        <div class="col-lg-4">
+						<div class="panel panel-default">
+						  <div class="panel-body">
+						<img src="/assets/contact-profile.png" alt="contact" class="avatar img-circle" />
+		                    <h3 class="name">Alejandra Galván Castillo</h3>
+		                    <span class="area">Operador</span>
+							<div class="panel-footer">
+								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
+							</div>
+						</div>
+					</div>
+			        </div><!-- /.col-lg-4 -->					
+			      </div><!-- /.row -->
+				
             </div>
             <div class="step-pane" id="step2">
+				<div class="row">					
+			        <div class="col-md-2">
 				 <%= image_tag "sobre_rueda.png" %>
+			 	</div>
+		        <div class="col-lg-3">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<%= image_tag "icon_truck.png"%>
+							<p>
+							<strong>Vehículos:</strong>
+							<%= @service.vehicles.size %>
+							<p>
+							
+							<% @service.vehicles.select([:plate,:economic,:color,:brand]) do |v|%>
+							<p>
+								<strong>Placa:</strong>
+								<%= v.plate %>
+							</p>
+							<p>
+								<strong>Económico:</strong>
+								<%= v.economic %>
+							</p>
+							<p>
+								<strong>Color:</strong>
+								<%= v.color %>
+							</p>
+							<p>
+								<strong>Marca:</strong>
+								<%= v.brand %>
+							</p>
+							<% end %>
+
+						</div>
+					</div>
+		        </div><!-- /.col-lg-4 -->	
+		        <div class="col-lg-4">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<%= image_tag "icon_spot.png"%>
+
+			                    <h5>Ubicación</h5>
+			                    <iframe width="300" height="133" scrolling="no" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
+			                    
+
+
+						</div>
+					</div>
+		        </div><!-- /.col-lg-4 -->					
+		      </div><!-- /.row -->
     
             </div>
             <div class="step-pane" id="step3">
-               <%= image_tag "en_tiempo.png" %>
+               
+			<div class="row">					
+		        <div class="col-lg-3">
+					<%= image_tag "en_tiempo.png" %>
+
+		        </div><!-- /.col-lg-4 -->
+		        <div class="col-lg-3">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+						  <%= image_tag "icon_checklist.png"%>
+							<p>
+							<strong>Fecha/Hora de Llegada:</strong>
+							<%= @service.arrival_date %>
+							</p>
+							<p>
+							<strong>Lugar destino:</strong>
+							</p>
+							<p>
+							<strong>Duración del trayecto:</strong>
+							</p>
+
+
+  						</div>
+ 						</div>
+		        </div><!-- /.col-lg-4 -->
+		        <div class="col-lg-3">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+						  <%= image_tag "icon_service.png"%>
+							<p>
+								<strong>Contactar al operador:</strong>
+								<%=  %>
+								<span class="area">Operador</span>
+							</p>
+							<p>
+								<strong>Teléfono:</strong>
+								<%=  %>
+								<span class="area">Teléfono</span>
+							</p>
+
+						<div class="panel-footer">
+							<a class="btn btn-default" href="#" role="button">Detalle Operador &raquo;</a>
+							<p></p>
+							<a class="btn btn-success" href="#" role="button">Confirmar Llegada </a>
+						</div>
+					</div>
+				</div>
+		        </div><!-- /.col-lg-4 -->					
+		      </div><!-- /.row -->
+			   
             </div>
             <div class="step-pane" id="step4">
-              <%= image_tag "protege.png" %>
+				<div class="row">					
+			        <div class="col-lg-4">
+						<%= image_tag "protege.png" %>
+
+			        </div><!-- /.col-lg-4 -->
+			        <div class="col-lg-3">
+						<div class="panel panel-default">
+						  <div class="panel-body">
+							  <%= image_tag "icon_scan.png"%>
+								<p>
+								<strong>Unidad GPS:</strong>
+								<%= @service.arrival_date %>
+								</p>
+								<p>
+								<strong>Fecha de Liberación:</strong>
+								</p>
+								<div class="panel-footer">
+
+									<a class="btn btn-info" href="#" role="button">Liberar GPS</a>
+								</div>
+
+	  						</div>
+	 						</div>
+			        </div><!-- /.col-lg-4 -->
+			  
+			  
+			  
             </div>
         </div>
         <div class="wizard-actions">
@@ -53,56 +220,6 @@
 </div>
 
 
-<p>
-  <strong>Shipment:</strong>
-  <%= @service.shipment %>
-</p>
-
-<p>
-  <strong>Departure date:</strong>
-  <%= @service.departure_date %>
-</p>
-
-<p>
-  <strong>Arrival date:</strong>
-  <%= @service.arrival_date %>
-</p>
-
-<p>
-  <strong>Release date:</strong>
-  <%= @service.release_date %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @service.status %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @service.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @service.longitude %>
-</p>
-
-
-<p>
-  <strong>Head:</strong>
-  <%= @service.vehicle_id %>
-</p>
-
-<p>
-  <strong>Departure:</strong>
-  <%= @service.departure_id %>
-</p>
-
-<p>
-  <strong>Arrival:</strong>
-  <%= @service.arrival_id %>
-</p>
 
 <%= link_to 'Edit', edit_service_path(@service) %> |
 <%= link_to 'Back', services_path %>
