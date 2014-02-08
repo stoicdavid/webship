@@ -58,6 +58,8 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem "nested_form"
 
+gem "aasm"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
