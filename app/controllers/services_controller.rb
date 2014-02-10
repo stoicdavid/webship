@@ -26,7 +26,10 @@ class ServicesController < ApplicationController
   # GET /services/new
   def new
     @service = Service.new
-    @service.vehicles.build
+    shipments = @service.shipments.build
+    shipments.vehicles.build
+    shipments.devices.build
+
   end
 
   # GET /services/1/edit
@@ -82,7 +85,12 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:shipment, :departure_date, :arrival_date, :release_date, :status, :latitude, :longitude,:latitude_dest, :longitude_dest, :location_id, :departure_id, :arrival_id,:completed,:user_id,:service_type,vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type])
+      params.require(:service).permit(:departure_date, :arrival_date, :release_date, :status, 
+                                      :latitude, :longitude,:latitude_dest, :longitude_dest, 
+                                      :location_id, :departure_id, :arrival_id,
+                                      :completed,:user_id,:service_type,:modality,
+                                      vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
+                                      shipment_attributes:[:shipment,:service_id])
     end                                                                                                                                                                                                                       
     def authenticate_user_from_token!                                                                                                                                                                                         
         user_token = params[:user_token].presence                                                                                                                                                                             

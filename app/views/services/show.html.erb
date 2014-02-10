@@ -79,31 +79,40 @@
 		        <div class="col-lg-3">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<%= image_tag "icon_truck.png"%>
-							<p>
-							<strong>Vehículos:</strong>
-							<%= @service.vehicles.size %>
-							<p>
-							
-							<% @service.vehicles.select([:plate,:economic,:color,:brand]) do |v|%>
-							<p>
-								<strong>Placa:</strong>
-								<%= v.plate %>
-							</p>
-							<p>
-								<strong>Económico:</strong>
-								<%= v.economic %>
-							</p>
-							<p>
-								<strong>Color:</strong>
-								<%= v.color %>
-							</p>
-							<p>
-								<strong>Marca:</strong>
-								<%= v.brand %>
-							</p>
+							<% if @service.vehicles.size<2 %>
+								<%= image_tag "icon_truck.png"%>
+							<% else %>
+								<%= image_tag "icon_truck.png" %>
+								<%= image_tag "icon_truck.png" %>
 							<% end %>
+							<p>
+							<strong>Servicio:</strong>
+							<%= @service.service_type==1?"doble": "sencillo"%>
+							<p>
+							<div class="row">							
+							<% @service.vehicles.select([:plate,:economic,:color,:brand]) do |v|%>
 
+								<div class="col-md-6">
+									<p>
+										<strong>Placa:</strong>
+										<%= v.plate %>
+									</p>
+									<p>
+										<strong>Económico:</strong>
+										<%= v.economic %>
+									</p>
+									<p>
+										<strong>Color:</strong>
+										<%= v.color %>
+									</p>
+									<p>
+										<strong>Marca:</strong>
+										<%= v.brand %>
+									</p>
+								</div>
+
+							<% end %>
+							</div>
 						</div>
 					</div>
 		        </div><!-- /.col-lg-4 -->	

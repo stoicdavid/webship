@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208222322) do
+ActiveRecord::Schema.define(version: 20140210023553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,14 +50,14 @@ ActiveRecord::Schema.define(version: 20140208222322) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "assignments", force: true do |t|
-    t.integer  "service_id"
-    t.integer  "container_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "device_id"
+    t.integer  "vehicle_id"
+    t.integer  "shipment_id"
   end
 
-  add_index "assignments", ["container_id"], name: "index_assignments_on_container_id", using: :btree
-  add_index "assignments", ["service_id"], name: "index_assignments_on_service_id", using: :btree
+  add_index "assignments", ["shipment_id"], name: "index_assignments_on_shipment_id", using: :btree
 
   create_table "containers", force: true do |t|
     t.string   "plate"
@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(version: 20140208222322) do
   add_index "locations", ["state_id"], name: "index_locations_on_state_id", using: :btree
 
   create_table "services", force: true do |t|
-    t.string   "shipment"
     t.datetime "departure_date"
     t.datetime "arrival_date"
     t.datetime "release_date"
@@ -143,10 +142,21 @@ ActiveRecord::Schema.define(version: 20140208222322) do
     t.boolean  "completed"
     t.integer  "service_type"
     t.string   "status"
+    t.integer  "state_id"
+    t.string   "modality"
   end
 
   add_index "services", ["device_id"], name: "index_services_on_device_id", using: :btree
   add_index "services", ["vehicle_id"], name: "index_services_on_vehicle_id", using: :btree
+
+  create_table "shipments", force: true do |t|
+    t.string   "shipment"
+    t.integer  "service_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shipments", ["service_id"], name: "index_shipments_on_service_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "name"

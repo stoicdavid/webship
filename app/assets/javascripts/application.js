@@ -13,7 +13,7 @@
 //= require wysihtml5-0.3.0
 
 //= require jquery
-// require jquery.turbolinks
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require select2
 //= require select2_locale_es
@@ -25,4 +25,4 @@
 //= require fuelux.wizard
 //= require theme
 //= require jquery_nested_form
-// require turbolinks
+//= require_tree ./site

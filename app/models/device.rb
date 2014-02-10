@@ -1,6 +1,6 @@
 class Device < ActiveRecord::Base
-  has_many :vehicles, :through => :services
-  has_many :services
+
+  has_many :assignments, dependent: :destroy
   
   
 end

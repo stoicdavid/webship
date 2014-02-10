@@ -1,6 +1,6 @@
-<%= simple_nested_form_for(@service, html: {:id=>'pad-wrapper',:class =>'form-page'},defaults: { wrapper_html: { class: 'field-box' } }) do |f| %>
-<div class="row form-wrapper">
-	<div class="col-md-7 column">
+<%= simple_nested_form_for(@service, html: {:id=>'pad-wrapper ',:class =>'form-page'},defaults: { wrapper_html: { class: 'field-box ' } }) do |f| %>
+<div class="row form-group form-horizontal">
+	<div class="col-md-12 column">
   <% if @service.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
@@ -12,72 +12,169 @@
       </ul>
     </div>
   <% end %>
+  
 
-	<div class"col-md-7">
-		<%= f.input :shipment,  as: :integer, input_html: {class:'form-control'} %>
+<div class="panel panel-default ">
+  <div class="panel-body">	
+
+		<%= f.input :departure_date,:as => :datetime_picker,input_html: {class:'form-control'},wrapper_html: {class:'field-box col-xs-4'} %>
+
 		
+
         <div class="field-box">
-            <label>Tipo de Servicio</label>
-            <div class="col-md-4">
-                <label class="radio">
-					<%= f.collection_radio_buttons :service_type, [[0, ' Sencillo'] ,[1, ' Doble']], :first, :last %>
-                 
-                </label>
+            <label>Tipo de Servicio:</label>
+            <div class="col-md-8">
+
+                    <%= f.collection_radio_buttons :service_type, [[1, ' Sencillo'] ,[2, ' Doble'],[3, ' Triple']], :first, :last,item_wrapper_class:{ class: "radio" } %>
 
             </div>                                
         </div>
+
+				
+	  	  </div>
+	  	</div>	
 		
+		<div class="row">					
+<% j=1 %>
+<% k=11 %>	
+<% l=1 %>	
+  <% 3.times do %>
+	
+	        <div class="col-xs-6 col-md-4">
+				<div class="panel panel-primary">
+				  <div class="panel-heading">
+  					<div class="pull-right">
+  						<label><h5 class="panel-title">Modalidad Full</h5></label>
+                          <div class="slider-frame ">
+                              <span data-on-text="SI" data-off-text="NO" class="slider-button">NO</span>
+                          </div>
+  					</div>
+					  
+				    <h3 class="panel-title">Servicio </h3>
+
+				  </div>
+				  <div class="panel-body">
+                      <div class="row ctrls">
+                          <ul class="nav nav-tabs">
+                            <li class="active"><a href=<%= "#shipment#{l}" %> >Shipments</a></li>
+                            <li><a href=<%= "#trayecto#{l}" %> >Trayecto</a></li>
+                            <li><a href=<%= "#operador#{l}" %> >Operador</a></li>
+                          </ul>
+						  <%= f.simple_fields_for :shipments,defaults:{ input_html: {class:'form-control '}, 																				wrapper_html:{class:'field-box'}} do |s| %>
+                          <div class="tab-content">
+                              <div class="tab-pane fade in active" id=<%= "shipments#{l}" %>>	
+								    						  
+								  <% 2.times do %>  
+								  	<p>
+									  <%= s.input :shipment %>								  		
+								  	</p>
+
+
+								  <div class="panel-group" id="accordion">
+								    <div class="panel panel-success">
+								      <div class="panel-heading">
+
+								        <h5 class="panel-title">
+											
+								          <a data-toggle="collapse" data-parent="#accordion" href=<%= "#collapse#{j}"%>>
+											  Vehículo 	 <span class="caret"></span>
+								          </a>
+
+								        </h5>
+								      </div>
+								      <div id=<%= "collapse#{j}" %> class="panel-collapse collapse ">
+								        <div class="panel-body">
+			  								<div class="well">
+												<%= s.simple_fields_for :vehicles,defaults:{ input_html: {class:'form-control'}, 																			  wrapper_html:{class:'field-box'}} do |v,i| %>
+												<%= v.input :plate, collection:Vehicle.select([:id,:plate]).limit(5).collect{|p|[p.plate,p.id]},input_html:{class:'select2'} %>
+												<%= v.input :economic %>
+												<%= v.input :container_type %>
+												<%= v.input :color %>
+												<%= v.input :features %>
+												<%= v.input :brand %>
+												<%= v.input :year %>				
+												<%= v.input :vehicle_type %>
+												<%= v.link_to_remove "Eliminiar vehículo" %>
+											<% end %>
+											</div>	
+												<p><%= s.link_to_add "Agregar vehículo", :vehicles %></p>	
+								        </div>
+								      </div>
+								    </div>			
+								  </div>
+								  
+								  
+								  <div class="panel-group" id="accordion2">
+								    <div class="panel panel-info">
+								      <div class="panel-heading">
+
+								        <h5 class="panel-title">
+											
+								          <a data-toggle="collapse" data-parent="#accordion2" href=<%= "#collapse#{k}"%>>
+											  GPS 	 <span class="caret"></span>
+								          </a>
+
+								        </h5>
+								      </div>
+								      <div id=<%= "collapse#{k}" %> class="panel-collapse collapse ">
+								        <div class="panel-body">
+			  								<div class="well">
+												<%= s.simple_fields_for :devices,defaults:{ input_html: {class:'form-control'}, 																			  wrapper_html:{class:'field-box'}} do |v| %>
+												<%= v.input :brand %>
+												<%= v.input :key %>
+											<% end %>
+											</div>		
+								        </div>
+								      </div>
+								    </div>			
+								  </div>
+								  
+								  
+							  <% j+=1 %>
+							  <% k+=1 %>								  
+								  <% end %>
+								  
+						  			
+								</div>
+                              <div class="tab-pane fade" id=<%= "trayecto#{l}" %>>  
+						  	  	<h2>Origen</h2>
+						  	  	<%= f.input :state_id,label:'Estado: ', collection: State.order(:name),input_html:{class:'select2'} %>
+						  	  	<%= f.input :departure_id,label:'CEDIS: ', collection: State.order(:name), as: :grouped_select, group_method: :locations,wrapper_html:{class:'field-box'} %>
+
+						  	  	<h2>Destino</h2>
+						  	  	<%= f.input :state_id,label:'Estado: ', collection: State.order(:name),input_html: { class:'select2',id:'service_state_id2' },wrapper_html:{class:'field-box'} %>
+						  	  	<%= f.input :arrival_id,label:'CEDIS: ', collection: State.order(:name), as: :grouped_select, group_method: :locations,wrapper_html:{class:'field-box'} %>
+  								
+						  	  </div>
+	                          <div class="tab-pane fade" id=<%= "operador#{l}" %>>
+							    <% end %>
+							  </div>
+						  	</div>	
+						  </div>
+                         
+							  							
+                          </div>
+                      </div>
+
+	        </div><!-- /.col-lg-4 -->
+			<% l+=1 %>
+			<% end %>
+	        
+					  
+			  			
+					  
 		
-	</div>
-		
+
 	
-   	 	<%= f.input :departure_date,:as => :datetime_picker,input_html: {class:'form-control'} %>
-	
-	
-	<script type="text/javascript">
-	    $(function () {
-	        $('#service_departure_date1').datetimepicker();
-	    });
-	</script>
-<h3>Vehículos</h3>
-
-		<%= f.simple_fields_for :vehicles,defaults:{ input_html: {class:'form-control'},wrapper_html:{class:'field-box'}} do |v| %>
-		<div class="well">
-			<%= v.input :plate %>
-			<%= v.input :economic %>
-			<%= v.input :container_type %>
-			<%= v.input :color %>
-			<%= v.input :features %>
-			<%= v.input :brand %>
-			<%= v.input :year %>				
-			<%= v.input :vehicle_type %>	
-			<%= v.link_to_remove "Eliminar vehículo" %>
-		<% end %>
-</div>		
-			<%= f.link_to_add "Agregar vehìculo",:vehicles %>								
 
 
+		  <div class="actions">
+		    <%= f.button :submit, class:'btn-flat' %>
+		  </div>
 
-	<%= f.simple_fields_for :locations,defaults:{ input_html: {class:'form-control'},wrapper_html:{class:'field-box'}} do |l| %>
-	<div class="panel panel-default">
-		<h3>
-		ORIGEN
-	</h3>
-		<%= l.input :cedis %>
-		<%= l.link_to_remove "Eliminar cedis" %>
-		<h3>
-		DESTINO
-	</h3>
-
-		<%= l.input :cedis %>
-		<%= l.link_to_remove "Eliminar cedis" %>
-	</div>
-	<% end %>
 
   
-  <div class="actions">
-    <%= f.button :submit, class:'btn-flat' %>
-  </div>
+  
   </div>
 </div>
 <% end %>

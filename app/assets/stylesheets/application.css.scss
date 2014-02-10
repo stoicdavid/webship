@@ -1,3 +1,7 @@
+/*
+ *= require jquery.ui.all
+ */
+
 @import "bootstrap";
 @import "bootstrap/bootstrap-overrides";
 @import 'bootstrap-datetimepicker';
@@ -5,7 +9,7 @@
 @import "scss/elements";
 @import "scss/icons";
 @import "lib/uniform.default";
-@import "lib/select2";
+@import "select2";
 @import "lib/bootstrap.datepicker";
 @import "lib/font-awesome";
 @import "scss/signup";
@@ -14,3 +18,4 @@
 @import "scss/form-showcase";
 @import "scss/form-wizard";
 @import "scss/personal-info";
+@import "scss/ui-elements";
