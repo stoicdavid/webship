@@ -1,5 +1,4 @@
 class ShipmentsController < ApplicationController
-  before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
   before_action :set_shipment, only: [:show, :edit, :update, :destroy]
   
@@ -86,18 +85,5 @@ class ShipmentsController < ApplicationController
                                        vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
                                        shipment_attributes:[:shipment,:service_id])
      end                                                                                                                                                                                                                       
-     def authenticate_user_from_token!                                                                                                                                                                                         
-         user_token = params[:user_token].presence                                                                                                                                                                             
-         user       = user_token && User.find_by_authentication_token(user_token.to_s)                                                                                                                                         
-                                                                                                                                                                                                                              
-         if user                                                                                                                                                                                                               
-           # Notice we are passing store false, so the user is not                                                                                                                                                              
-           # actually stored in the session and a token is needed
-           # for every request. If you want the token to work as a
-           # sign in token, you can simply remove store: false.
-           sign_in user, store: false
-       end
-     end
- end
-  
+       
 end
