@@ -2,7 +2,7 @@ class ShipmentsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_shipment, only: [:show, :edit, :update, :destroy]
   
-  GET /shipments
+   # GET /shipments
    # GET /shipments.json
    def index
      @shipments = Shipment.all
