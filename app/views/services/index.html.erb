@@ -50,7 +50,7 @@
 				
 			    <% @services.each do |service| %>
 			      <tr class="first">
-			        <td><%= service.shipment %></td>
+			        <td><%= service.shipments.collect{|p| p.shipment}  %></td>
 			        <td><%= service.departure_date %></td>
 			        <td><%= service.arrival_id %></td>
 			        <td><%= service.status %>
