@@ -37,12 +37,45 @@ jQuery ->
 	  e.preventDefault();
 	  $(this).tab('show');
   
-  $('.slider-button').click ->
+  $('#slider1').click ->
 	  if $(this).hasClass("on")
 		  $(this).removeClass('on').html($(this).data("off-text"))
 		  $(this).parent().removeClass('success')
+		  $('#shipment_mode2').addClass('hidden')
 	  else
 		  $(this).addClass('on').html($(this).data("on-text"))
 		  $(this).parent().addClass('success')
+		  $('#shipment_mode2').removeClass('hidden')
+  $('#slider2').click ->
+	  if $(this).hasClass("on")
+		  $(this).removeClass('on').html($(this).data("off-text"))
+		  $(this).parent().removeClass('success')
+		  $('#shipment_mode4').addClass('hidden')
+	  else
+		  $(this).addClass('on').html($(this).data("on-text"))
+		  $(this).parent().addClass('success')
+		  $('#shipment_mode4').removeClass('hidden')
+  $('#slider3').click ->
+	  if $(this).hasClass("on")
+		  $(this).removeClass('on').html($(this).data("off-text"))
+		  $(this).parent().removeClass('success')
+		  $('#shipment_mode6').addClass('hidden')
+	  else
+		  $(this).addClass('on').html($(this).data("on-text"))
+		  $(this).parent().addClass('success')
+		  $('#shipment_mode6').removeClass('hidden')		  		  	
+		  
+  $('#service_service_type_2').click ->
+	  $('#service-panel2').removeClass('invisible')
+	  $('#service-panel3').addClass('invisible')
+  $('#service_service_type_1').click ->
+	  $('#service-panel2').addClass('invisible')	  
+	  $('#service-panel3').addClass('invisible')	  
+  $('#service_service_type_3').click ->
+	  $('#service-panel2').removeClass('invisible')
+	  $('#service-panel3').removeClass('invisible')	  	  
+
+	 	  
+	
 		  
 		  
