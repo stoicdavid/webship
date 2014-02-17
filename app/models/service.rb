@@ -1,7 +1,11 @@
 class Service < ActiveRecord::Base
   belongs_to :user
   has_many :shipments, dependent: :destroy
-  accepts_nested_attributes_for :shipments, :allow_destroy => true
+  has_many :vehicles, :through => :shipments
+  has_many :devices, :through => :shipments
+  accepts_nested_attributes_for :shipments, :allow_destroy => true,:reject_if => lambda { |attrs|
+                  attrs.all? { |key, value| value.blank? }
+                }
 
   default_scope order('completed ASC, created_at DESC')
   
@@ -12,4 +16,11 @@ class Service < ActiveRecord::Base
   def polyline
       Polylines::Encoder.encode_points(self.polyline_points)
   end
+  
+  def with_blank_shipments(n = 1) n.times do
+      shipments.build
+  end
+  self
+  end
+  
 end

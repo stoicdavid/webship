@@ -60,6 +60,7 @@ gem "nested_form"
 
 gem "aasm"
 
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -79,6 +80,8 @@ gem 'unicorn'
 # Use Capistrano for deployment
 #gem 'capistrano', group: :development
 gem 'capistrano-rails', group: :development
+
+gem 'rack-mini-profiler', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

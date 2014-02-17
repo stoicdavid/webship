@@ -1,12 +1,17 @@
 Webship::Application.routes.draw do
+  resources :search_suggestions
+
   resources :shipments
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
-  
-  resources :services
 
+  get 'services/update_form'=>'services#update_form'  
+  resources :services
+  
+
+  
   resources :lines
 
   resources :containers
@@ -14,6 +19,8 @@ Webship::Application.routes.draw do
   resources :vehicles
 
   resources :locations
+  
+  resources :devices
   
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do

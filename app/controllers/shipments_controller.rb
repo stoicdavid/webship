@@ -25,7 +25,6 @@ class ShipmentsController < ApplicationController
    # GET /shipments/new
    def new
      @shipment = Shipment.new
-     @shipment.vehicles.build
    end
 
    # GET /shipments/1/edit
@@ -83,7 +82,8 @@ class ShipmentsController < ApplicationController
      def shipment_params
        params.require(:shipment).permit(:shipment, :service_id,
                                        vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
-                                       shipment_attributes:[:shipment,:service_id])
+                                       shipment_attributes:[:shipment,:service_id],
+                                       device_attributes:[:brand,:key,:device_id,:assigned],:device_ids)
      end                                                                                                                                                                                                                       
        
 end

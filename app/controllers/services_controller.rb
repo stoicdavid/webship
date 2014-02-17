@@ -27,9 +27,17 @@ class ServicesController < ApplicationController
   def new
     @service = Service.new
     shipments = @service.shipments.build
-    shipments.vehicles.build
+    2.times {shipments.vehicles.build}
     shipments.devices.build
 
+  end
+  
+  def update_form
+    @vehicle = Vehicle.where(plate:params['plate'],vehicle_type:params['vehicle_type']).take
+    @id = params['id']
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /services/1/edit
@@ -89,8 +97,11 @@ class ServicesController < ApplicationController
                                       :latitude, :longitude,:latitude_dest, :longitude_dest, 
                                       :location_id, :departure_id, :arrival_id,
                                       :completed,:user_id,:service_type,:modality,
-                                      vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
-                                      shipment_attributes:[:shipment,:service_id])
+                                      shipment_attributes:[:id,:shipment,:service_id,
+                                        {
+                                          vehicles_attributes:[:id,:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
+                                          device_attributes:[:id,:brand,:key,:assigned]
+                                        },:device_ids])
     end                                                                                                                                                                                                                       
     def authenticate_user_from_token!                                                                                                                                                                                         
         user_token = params[:user_token].presence                                                                                                                                                                             

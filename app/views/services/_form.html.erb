@@ -1,201 +1,150 @@
-<%= simple_nested_form_for(@service, html: {:id=>'pad-wrapper ',:class =>'form-page'},defaults: { wrapper_html: { class: 'field-box ' } }) do |f| %>
-<div class="row form-group form-horizontal">
-	<div class="col-md-12 column">
-  <% if @service.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
-
-      <ul>
-      <% @service.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-
-<div class="panel panel-default ">
-  <div class="panel-body">	
-
-		<%= f.input :departure_date,:as => :datetime_picker,input_html: {class:'form-control'},wrapper_html: {class:'col-xs-4'} %>
-
-		
-
-        
-            <label>Tipo de Servicio:</label>
-            <div class="col-md-8">
-
-                    <%= f.collection_radio_buttons :service_type, [[1, ' Sencillo'] ,[2, ' Doble'],[3, ' Triple']], :first, :last, :checked => m||=1 unless f.object.service_type %>
-
-          									
-        </div>
-
-				
-	  	  </div>
-	  	</div>	
-		
-		<div class="row">					
-<% j=1 %>
-<% k=11 %>	
-<% l=1 %>	
-  <% 3.times do %>
-	
-	        <div class="col-xs-6 col-md-4"> 
-				<div class=<%= l>m ? "invisible" : "" %> id=<%= "service-panel#{l}"%>>
-				<div class="panel panel-primary"   >
-				  <div class="panel-heading">
-  					<div class="pull-right">
-  						<label><h5 class="panel-title">Modalidad Full</h5></label>
-                          <div class="slider-frame ">
-                              <span data-on-text="SI" data-off-text="NO" class="slider-button" id=<%= "slider#{l}" %>>NO</span>
-                          </div>
-  					</div>
-					  
-				    <h3 class="panel-title"  %>Servicio </h3>
-
-				  </div>
-				  <div class="panel-body">
-                      <div class="row ctrls">
-                          <ul class="nav nav-tabs">
-                            <li class="active"><a href=<%= "#shipment#{l}" %> >Shipments</a></li>
-                            <li><a href=<%= "#trayecto#{l}" %> >Trayecto</a></li>
-                            <li><a href=<%= "#operador#{l}" %> >Operador</a></li>
-                          </ul>
-						  <%= f.simple_fields_for :shipments,defaults:{ input_html: {class:'form-control '}, 																				wrapper_html:{class:'field-box'}} do |s| %>
-                          <div class="tab-content">
-                              <div class="tab-pane fade in active" id=<%= "shipment#{l}" %>>	
-								    						  
-								  <% 2.times do %>
-								  <div class=<%= j%2==0 ? "hidden" : "" %> id=<%= "shipment_mode#{j}"%>>
-								  	<p>
-									  <%= s.input :shipment %>								  		
-								  	</p>
-
-
-								  <div class="panel-group" id="accordion">
-								    <div class="panel panel-success">
-								      <div class="panel-heading">
-
-								        <h5 class="panel-title">
-											
-								          <a data-toggle="collapse" data-parent="#accordion" href=<%= "#collapse#{j}"%>>
-											  Vehículo 	 <span class="caret"></span>
-								          </a>
-
-								        </h5>
-								      </div>
-								      <div id=<%= "collapse#{j}" %> class="panel-collapse collapse ">
-								        <div class="panel-body">
-			  								<div class="well">
-												<%= s.simple_fields_for :vehicles,defaults:{ input_html: {class:'form-control'}, 																			  wrapper_html:{class:'field-box'}} do |v,i| %>
-												<%= v.input :plate, collection:Vehicle.select([:id,:plate]).limit(5).collect{|p|[p.plate,p.id]},input_html:{class:'select2'} %>
-												<%= v.input :economic %>
-												<%= v.input :container_type %>
-												<%= v.input :color %>
-												<%= v.input :features %>
-												<%= v.input :brand %>
-												<%= v.input :year %>				
-												<%= v.input :vehicle_type, collection: [['Tracto',1],['Caja',2]] %>
-												<%= v.link_to_remove "Eliminiar vehículo" %>
-											<% end %>
-											</div>	
-												<p><%= s.link_to_add "Agregar vehículo", :vehicles %></p>	
-								        </div>
-								      </div>
-								    </div>			
-								  </div>
-								  
-								  
-								  <div class="panel-group" id="accordion2">
-								    <div class="panel panel-info">
-								      <div class="panel-heading">
-
-								        <h5 class="panel-title">
-											
-								          <a data-toggle="collapse" data-parent="#accordion2" href=<%= "#collapse#{k}"%>>
-											  GPS 	 <span class="caret"></span>
-								          </a>
-
-								        </h5>
-								      </div>
-								      <div id=<%= "collapse#{k}" %> class="panel-collapse collapse ">
-								        <div class="panel-body">
-			  								<div class="well">
-												<%= s.simple_fields_for :devices,defaults:{ input_html: {class:'form-control'}, 																			  wrapper_html:{class:'field-box'}} do |v| %>
-												<%= v.input :brand %>
-												<%= v.input :key %>
-											<% end %>
-											</div>		
-								        </div>
-								      </div>
-								    </div>			
-								  </div>
-								  
-								  
-							  <% j+=1 %>
-							  <% k+=1 %>
-							  </div>								  
-								  <% end %>
-								  
-						  			
-								</div>
-                              <div class="tab-pane fade" id=<%= "trayecto#{l}" %>>  
-						  	  	<h2>Origen</h2>
-						  	  	<%= f.input :state_id,label:'Estado: ', collection: State.order(:name),input_html:{class:'select2'} %>
-						  	  	<%= f.input :departure_id,label:'CEDIS: ', collection: State.order(:name), as: :grouped_select, group_method: :locations,wrapper_html:{class:'field-box'} %>
-
-						  	  	<h2>Destino</h2>
-						  	  	<%= f.input :state_id,label:'Estado: ', collection: State.order(:name),input_html: { class:'select2',id:'service_state_id2' },wrapper_html:{class:'field-box'} %>
-						  	  	<%= f.input :arrival_id,label:'CEDIS: ', collection: State.order(:name), as: :grouped_select, group_method: :locations,wrapper_html:{class:'field-box'} %>
-  								
-						  	  </div>
-	                          <div class="tab-pane fade" id=<%= "operador#{l}" %>>
-							    <% end %>
-							  </div>
-						  	</div>	
-						  </div>
-                         
-							  							
-                          </div>
+<%= simple_nested_form_for(@service.with_blank_shipments, html: {:id=>'pad-wrapper ',:class =>'form-page'},
+                            defaults: { wrapper_html: { class: 'field-box ' } }) do |f| %>  
+      <div class="row form-group form-horizontal">
+        <div class="col-md-12 column">
+          <% if @service.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+            <ul>
+              <% @service.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+          <div class="panel panel-default ">
+            <div class="panel-body">	
+              <%= f.input :departure_date,:as => :datetime_picker,
+              input_html: {class:'form-control'},wrapper_html: {class:'col-xs-4'},label:"Fecha de Salida" %>        
+              <label>Tipo de Servicio:</label>
+              <div class="col-md-8">
+                <%= f.collection_radio_buttons :service_type, [[1, ' Sencillo'] ,[2, ' Doble'],[3, ' Triple']], 
+                :first, :last, :checked => m||=1 unless f.object.service_type %>          									
+              </div>
+            </div>
+          </div>	
+          <div class="row">					
+            <% j=1 %>
+            <% k=11 %>	
+            <% l=1 %>	
+            <% n=1 %>	
+            <% 3.times do %><!-- Genera Paneles -->	
+              <div class="col-xs-6 col-md-4"> 
+                <div class=<%= l>m ? "invisible" : "" %> id=<%= "service-panel#{l}"%>>
+                  <div class="panel panel-primary"   >
+                    <div class="panel-heading">
+                      <div class="pull-right">
+                        <label><h5 class="panel-title">Modalidad Full</h5></label>
+                        <div class="slider-frame ">
+                          <span data-on-text="SI" data-off-text="NO" class="slider-button" id=<%= "slider#{l}" %>>NO</span>
+                        </div>
                       </div>
-
-	        </div><!-- /.col-lg-4 -->
-			<% l+=1 %>
-		</div>			
-			<% end %>
-	        
-					  
-			  			
-					  
-		
-
-	
-
-
-		  <div class="actions">
-		    <%= f.button :submit, class:'btn-flat' %>
-		  </div>
-
-
-  
-  
-  </div>
-</div>
-<% end %>
-<script type="text/javascript">
-    $(function () {
-
-        // add uniform plugin styles to html elements
-        $("input:checkbox, input:radio").uniform();
-
-        // select2 plugin for select elements
-        $(".select2").select2({
-            placeholder: "Select a State"
-        });
-
-        // datepicker plugin
-        $('.input-datepicker').datepicker().on('changeDate', function (ev) {
-            $(this).datepicker('hide');
-        });
-    });
-</script>
+                      <h3 class="panel-title"  %>Servicio </h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="row ctrls">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href=<%= "#shipment#{l}" %> >Shipments</a></li>
+                          <li><a href=<%= "#trayecto#{l}" %> >Trayecto</a></li>
+                          <li><a href=<%= "#operador#{l}" %> >Operador</a></li>
+                        </ul>
+                        <%= f.simple_fields_for :shipments,defaults:{ input_html: {class:'form-control '}, 																				wrapper_html:{class:'field-box'}} do |s| %>
+                          <div class="tab-content">
+                            <div class="tab-pane fade in active" id=<%= "shipment#{l}" %>>			  
+                              <%# 1.times do %><!-- Genera Shipments -->	
+              								  <div class=<%= j%2==0 ? "hidden" : "" %> id=<%= "shipment_mode#{j}"%>>
+            								  	  <p><%= s.input :shipment %></p>
+              								    <div class="panel-group" id="accordion">
+              								    <div class="panel panel-success">
+              								      <div class="panel-heading">
+              								        <h5 class="panel-title">
+								                        <a data-toggle="collapse" data-parent="#accordion" href=<%= "#collapse#{j}"%>>
+                                          Vehículo 	 <span class="caret"></span>
+                                        </a>
+                                      </h5>
+                                    </div>
+                                    <div id=<%= "collapse#{j}" %> class="panel-collapse collapse ">
+                                      <div class="panel-body">
+                                        <div class="well">
+                                          <%= s.simple_fields_for :vehicles,
+                                          defaults:{ input_html: {class:'form-control'},
+                                          wrapper_html:{class:'field-box'}} do |v,i| %>
+                                            <%= v.input :vehicle_type, 
+                                            collection: [['Tracto',1],['Caja',2]],
+                                            input_html:{id:"vehicle-type#{n}"},
+                                            label:'Tipo de Vehículo' %>
+                                            <%= v.input :plate,input_html:{class:'selector',id:"vehicle-plate#{n}"},label:"Placa" %>
+                    												<%= v.input :economic,input_html:{id:"vehicle-economic#{n}"},label:"Económico Unidad" %>
+                    												<%# v.input :container_type %>
+                    												<%= v.input :color,input_html:{id:"vehicle-color#{n}"} %>
+                    												<%# v.input :features %>
+                    												<%= v.input :brand,input_html:{id:"vehicle-brand#{n}"},label:"Marca" %>
+                    												<%= v.input :seal_number,input_html:{id:"vehicle-seal#{n}"},label:"# Sellos de caja" %>
+                    												<%= v.input :year,input_html:{id:"vehicle-year#{n}"},label:"Modelo (año)" %>				
+                                            <%= v.link_to_remove "Eliminiar vehículo" %>
+                                            <% n+=1 %>                          
+                                          <% end %>
+                                        </div>	
+                                        <p><%= s.link_to_add "Agregar caja", :vehicles %></p>	
+								                      </div>
+								                    </div>
+								                  </div>			
+								                </div>
+								                  <div class="panel-group" id="accordion2">
+								                  <div class="panel panel-info">
+								                    <div class="panel-heading">
+								                      <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion2" href=<%= "#collapse#{k}"%>>
+                                          GPS 	 <span class="caret"></span>
+                                        </a>
+                                      </h5>
+                                    </div>
+                                    <div id=<%= "collapse#{k}" %> class="panel-collapse collapse ">
+                                      <div class="panel-body">
+                                        <div class="well">
+                                          <%= s.collection_select :device_ids,
+                                          Device.where(assigned:false).select(:key,:id),
+                                          :id,:key,{},{multiple:true,class:"select-gps"} %>
+                                          <%# s.simple_fields_for :devices,defaults:{ input_html: {class:'form-control'}, 																			    wrapper_html:{class:'field-box'}} do |v| %>
+												<%# v.input :brand,label:"Marca" %>
+												<%# v.input :key,label:"# Portátil", collection:Device.where(assigned:false).select(:key,:id).collect {|d| [d.key,d.id]},wrapper_html:{class:"select2-container select2-container-multi populate"},input_html:{class:"select2-input select2-default"} %>
+											<%# end %>
+                                        </div>		
+                                      </div>
+                                    </div>
+                                  </div>			
+                                </div>
+                                  <% j+=1 %>
+                                  <% k+=1 %>
+                                </div>								  
+                              <%# end %>
+                            </div>  
+                            <div class="tab-pane fade" id=<%= "trayecto#{l}" %>>  
+                              <h2>Origen</h2>
+                              <%= f.input :state_id,label:'Estado: ', collection: State.order(:name),input_html:{class:'select2'} %>
+                              <%= f.input :departure_id,label:'CEDIS: ', collection: State.order(:name), as: :grouped_select, 
+                              group_method: :locations,wrapper_html:{class:'field-box'} %>
+                              <h2>Destino</h2>
+                              <%= f.input :state_id,label:'Estado: ', collection: State.order(:name),
+                              input_html: { class:'select2',id:'service_state_id2' },wrapper_html:{class:'field-box'} %>
+                              <%= f.input :arrival_id,label:'CEDIS: ', collection: State.order(:name), as: :grouped_select, 
+                              group_method: :locations,wrapper_html:{class:'field-box'} %>
+                            </div>
+                            <div class="tab-pane fade" id=<%= "operador#{l}" %>>
+                            </div>
+                          </div>
+                        <% end %>	
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% l+=1 %>
+              </div><!-- /.col-lg-4 -->	
+            <% end %>
+            <div class="actions">
+              <%= f.button :submit, class:'btn-flat' %>
+            </div>
+          </div>
+        </div>
+      </div>
+<% end %><!-- Finaliza la forma -->

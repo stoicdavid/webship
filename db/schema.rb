@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210023553) do
+ActiveRecord::Schema.define(version: 20140217050223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140210023553) do
     t.integer  "device_id"
     t.integer  "vehicle_id"
     t.integer  "shipment_id"
+    t.integer  "line_id"
   end
 
   add_index "assignments", ["shipment_id"], name: "index_assignments_on_shipment_id", using: :btree
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140210023553) do
     t.string   "key",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "assigned"
   end
 
   create_table "districts", force: true do |t|
@@ -123,6 +125,13 @@ ActiveRecord::Schema.define(version: 20140210023553) do
   end
 
   add_index "locations", ["state_id"], name: "index_locations_on_state_id", using: :btree
+
+  create_table "search_suggestions", force: true do |t|
+    t.string   "term"
+    t.integer  "popularity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "services", force: true do |t|
     t.datetime "departure_date"
@@ -205,6 +214,7 @@ ActiveRecord::Schema.define(version: 20140210023553) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "service_id"
+    t.string   "seal_number"
   end
 
   add_index "vehicles", ["line_id"], name: "index_vehicles_on_line_id", using: :btree

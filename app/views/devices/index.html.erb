@@ -1,0 +1,76 @@
+<!-- Jumbotron -->
+
+<!-- orders table -->
+<div class="table-wrapper orders-table section">
+    <div class="row head">
+        <div class="col-md-12">
+            <h4>Lista de GPS </h4>
+        </div>
+    </div>
+
+    <div class="row filter-block">
+        <div class="pull-right">
+            <div class="btn-group pull-right">
+                <button class="glow left large">Disponibles</button>
+                <button class="glow middle large">Asignados</button>
+            </div>
+            <input type="text" class="search order-search" placeholder="Buscar un GPS.." />
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-2">
+                      iD
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Marca
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        No. Portátil
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Asignado
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+				
+			    <% @devices.each do |device| %>
+			      <tr class="first">
+              <td><%= device.id  %></td>
+			        <td><%= device.brand  %></td>
+			        <td><%= device.key %></td>
+			        <td><%= device.assigned %></td>
+
+			        <td>
+                        <ul class="actions">
+                            <li><%= link_to 'Show', device %></li>
+							<li><%= link_to 'Edit', edit_device_path(device) %></li>
+                            <li class="last"><%= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                        </ul>
+						
+						</td>
+
+			      </tr>
+			    <% end %>
+				
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- end orders table -->
+
+
+
+<%= link_to 'Agregar GPS', new_device_path,class:"btn-flat success new-product" %>
