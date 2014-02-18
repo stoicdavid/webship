@@ -3,9 +3,7 @@ class Service < ActiveRecord::Base
   has_many :shipments, dependent: :destroy
   has_many :vehicles, :through => :shipments
   has_many :devices, :through => :shipments
-  accepts_nested_attributes_for :shipments, :allow_destroy => true,:reject_if => lambda { |attrs|
-                  attrs.all? { |key, value| value.blank? }
-                }
+  accepts_nested_attributes_for :shipments, :reject_if => lambda { |attrs| attrs[:shipment].blank?},:allow_destroy => true 
 
   default_scope order('completed ASC, created_at DESC')
   

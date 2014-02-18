@@ -97,11 +97,11 @@ class ServicesController < ApplicationController
                                       :latitude, :longitude,:latitude_dest, :longitude_dest, 
                                       :location_id, :departure_id, :arrival_id,
                                       :completed,:user_id,:service_type,:modality,
-                                      shipment_attributes:[:id,:shipment,:service_id,
+                                      shipments_attributes:[:id,:shipment,:service_id,:device_ids,
                                         {
-                                          vehicles_attributes:[:id,:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
-                                          device_attributes:[:id,:brand,:key,:assigned]
-                                        },:device_ids])
+                                          vehicles_attributes:[:id,:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type,:seal_number],
+                                          devices_attributes:[:id,:brand,:key,:assigned]
+                                        }])
     end                                                                                                                                                                                                                       
     def authenticate_user_from_token!                                                                                                                                                                                         
         user_token = params[:user_token].presence                                                                                                                                                                             
