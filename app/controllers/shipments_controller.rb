@@ -82,7 +82,7 @@ class ShipmentsController < ApplicationController
      def shipment_params
        params.require(:shipment).permit(:shipment, :service_id,:device_ids,
                                        vehicles_attributes:[:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type],
-                                       shipment_attributes:[:shipment,:service_id],
+                                       shipment_attributes:[:shipment,:service_id,:device_ids],
                                        device_attributes:[:brand,:key,:device_id,:assigned])
      end                                                                                                                                                                                                                       
        

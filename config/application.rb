@@ -38,6 +38,6 @@ module Webship
       end
     }
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-    config.middleware.insert_before 0 ,"SearchSuggestions"
+    #config.middleware.insert_before 0 ,"SearchSuggestions"
   end
 end

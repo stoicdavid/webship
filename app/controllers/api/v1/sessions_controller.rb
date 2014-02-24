@@ -5,20 +5,55 @@ class Api::V1::SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    render :status => 200,
-           :json => { :success => true,
-                      :info => "Logged in",
-                      :data => { :auth_token => current_user.authentication_token } }
+                      
+    email = params[:email]
+    password = params[:password]
+    if request.format != :json
+      render :status=>406, :json=>{:message=>"The request must be json"}
+    return
+    end
+
+    if email.nil? or password.nil?
+    render :status=>400,
+          :json=>{:message=>"The request must contain the user email and password."}
+    return
+    end
+
+    @user=User.find_by_email(email.downcase)
+
+    if @user.nil?
+      logger.info("User #{email} failed signin, user cannot be found.")
+      render :status=>401, :json=>{:message=>"Invalid email or passoword."}
+      return
+    end
+
+    # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable
+    @user.ensure_authentication_token!
+
+    if not @user.valid_password?(password)
+      logger.info("User #{email} failed signin, password \"#{password}\" is invalid")
+      render :status=>401, :json=>{:message=>"Invalid email or password."}
+    else
+      render :status=>200, 
+      :json => { :success => true,
+                           :info => "Logged in",
+                           :data => { :auth_token => @user.authentication_token } }
+    end                      
   end
 
   def destroy
-    warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
-    current_user.update_column(:authentication_token, nil)
-    render :status => 200,
-           :json => { :success => true,
-                      :info => "Logged out",
-                      :data => {} }
+    @user=User.find_by_authentication_token(params[:auth_token])
+        if @user.nil?
+          logger.info("Token not found.")
+          render :status=>404, :json=>{:message=>"Invalid token."}
+        else
+          #@user.reset_authentication_token!
+          @user.update_column(:authentication_token, nil)
+          render :status => 200,
+                     :json => { :success => true,
+                                :info => "Logged out",
+                                :data => {} }
+        end
   end
 
   def failure

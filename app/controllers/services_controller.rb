@@ -48,7 +48,16 @@ class ServicesController < ApplicationController
   # POST /services
   # POST /services.json
   def create
+
     @service = Service.new(service_params)
+    
+    params[:service][:shipments_attributes].each do |k,ship|
+      ship.each do |k,device|
+        if k.to_s[/device_ids.*/]
+        device.each{|d| d.blank? ? d:Device.find(d).update(:assigned=>true)}
+      end
+    end
+    end
 
     respond_to do |format|
       if @service.save
@@ -96,13 +105,17 @@ class ServicesController < ApplicationController
       params.require(:service).permit(:departure_date, :arrival_date, :release_date, :status, 
                                       :latitude, :longitude,:latitude_dest, :longitude_dest, 
                                       :location_id, :departure_id, :arrival_id,
-                                      :completed,:user_id,:service_type,:modality,
-                                      shipments_attributes:[:id,:shipment,:service_id,:device_ids,
+                                      :completed,:user_id,:service_type,:modality,:state_id,
+                                      shipments_attributes:[:id,:shipment,:service_id,:_destroy,
                                         {
-                                          vehicles_attributes:[:id,:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type,:seal_number],
-                                          devices_attributes:[:id,:brand,:key,:assigned]
-                                        }])
-    end                                                                                                                                                                                                                       
+                                          vehicles_attributes:
+                                          [:id,:plate,:economic,:container_type,:color,:features,:brand,:year,:vehicle_type,:seal_number,:_destroy]
+                                          },:device_ids=>[]])
+    end
+    
+
+    
+                                                                                                                                                                                                                           
     def authenticate_user_from_token!                                                                                                                                                                                         
         user_token = params[:user_token].presence                                                                                                                                                                             
         user       = user_token && User.find_by_authentication_token(user_token.to_s)                                                                                                                                         

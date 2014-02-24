@@ -58,6 +58,8 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem "nested_form"
 
+gem "kaminari"
+
 gem "aasm"
 
 

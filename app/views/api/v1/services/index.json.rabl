@@ -4,6 +4,12 @@ node (:info) { 'ok' }
 child :data do
   node (:services_count) { @services.size }
   child @services do
-    attributes :id, :shipment,:departure_date, :device_id,:vehicle_id,:created_at, :completed
+    attribute :id,:departure_date
+    child :shipments do
+      attribute :shipment
+      child :vehicles do
+        attribute :plate
+      end
+    end
   end
 end

@@ -3,7 +3,10 @@ class Api::V1::ServicesController < ApplicationController
                      :if => Proc.new { |c| c.request.format == 'application/json' }
 
   # Just skip the authentication for now
-  before_filter :authenticate_user!
+  
+  #before_filter :authenticate_with_http_token
+
+  #before_filter :authenticate_user!
 
   respond_to :json
 
@@ -25,5 +28,14 @@ class Api::V1::ServicesController < ApplicationController
 
   def destroy
     respond_with Service.destroy(params[:id])
+  end
+  
+  def authenticate_with_http_token
+    auth_header = request.headers['Authorization'].to_s
+    token = auth_header[/token="(.*?)"/,1]
+    return unless token
+
+    user = User.find_by_authentication_token(token)
+    sign_in user if user
   end
 end
