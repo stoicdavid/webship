@@ -171,6 +171,12 @@ jQuery ->
   $('.nav-tabs a').click (e)->
 	  e.preventDefault();
 	  $(this).tab('show');
+    
+  $('.wizard-actions .btn-next').click ->
+    id = $('.wizard-actions .btn-next').data('id')
+    $.get '/services/transition?id=' + id, ->
+      return
+    return
   
   $('#slider1').click ->
 	  if $(this).hasClass("on")

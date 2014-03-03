@@ -8,6 +8,7 @@ Webship::Application.routes.draw do
   devise_for :users
 
   get 'services/update_form'=>'services#update_form'  
+  get 'services/transition'=>'services#transition'    
   resources :services
   
 

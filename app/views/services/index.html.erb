@@ -24,7 +24,7 @@
             <thead>
                 <tr>
                     <th class="col-md-2">
-                        Shipment
+                        Shipments
                     </th>
                     <th class="col-md-2">
                         <span class="line"></span>
@@ -40,6 +40,10 @@
                     </th>
                     <th class="col-md-2">
                         <span class="line"></span>
+                        Usuario
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
                         Opciones
                     </th>
 
@@ -49,20 +53,18 @@
                 <!-- row -->
 				
 			    <% @services.each do |service| %>
+          <% ships= service.shipments.collect{|p| p.shipment}%>
 			      <tr class="first">
-			        <td><%= service.shipments.collect{|p| p.shipment}  %></td>
+			        <td> #<%= ships.join(" #") %> </td>
 			        <td><%= service.departure_date %></td>
 			        <td><%= service.arrival_id %></td>
-			        <td><%= service.status %>
-						<span class="label label-success">Completed</span>
-					</td>
+						<td><span class="<%= service.state_index==4 ? "label label-success":"label label-info" %>" class="label label-info"><%= service.aasm.human_state %></span>              
+			        
+			        <td><%= service.user.email %></td>
 			        <td>
-                        <ul class="actions">
-                            <li><%= link_to 'Show', service %></li>
-							<li><%= link_to 'Edit', edit_service_path(service) %></li>
-                            <li class="last"><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-                        </ul>
-						
+                <%= link_to 'Show', service, class:"btn btn-warning btn-xs" %>
+                <%= link_to 'Edit', edit_service_path(service),  class:"btn btn-warning btn-xs"%>
+                <%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-xs" %>
 						</td>
 
 			      </tr>

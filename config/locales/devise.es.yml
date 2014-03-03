@@ -21,6 +21,7 @@ es:
       invalid_token: 'Ficha de autenticación invalida.'
       timeout: 'Su sesión ha expirado, por favor ingrese nuevamente para continuar.'
       inactive: 'Su cuenta aún no ha sido activada.'
+      not_approved: 'Tu cuenta no ha sido aprobada por el administrador.'
     sessions:
       signed_in: 'Ingreso exitoso.'
       signed_out: 'Usted ha salido del sistema.'
@@ -38,6 +39,8 @@ es:
       inactive_signed_up: 'Se ha registrado exitosamente, sin embargo, debido a que su cuenta esta %{reason}.'
       updated: 'Usted actualizó su cuenta exitosamente.'
       destroyed: '¡Hasta luego! Su cuenta fue cancelada con éxito, esperamos verle de nuevo pronto. Gracias.'
+      user:
+        signed_up_but_not_approved: 'Has entrado exitosamente pero tu cuenta no has sido aprobada por el administrador'
       reasons:
         inactive: 'inactiva'
         unconfirmed: 'sin confirmar'

@@ -1,0 +1,4 @@
+$('#status').html("<%= j @service.aasm.human_state %>");
+$('.step-pane').removeClass("active")
+$('#<%="step#{@service.state_index}" %>').addClass("step-pane active")
+$('.wizard-actions .btn-next').html('<%= j @service.read_next_event %>')

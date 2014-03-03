@@ -6,7 +6,11 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all
+    if current_user.role? :monitorista
+      @services = Service.all
+    else  
+      @services = Service.where(user_id: current_user.id)
+    end
   end
 
   # GET /services/1
@@ -38,6 +42,16 @@ class ServicesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+  
+  def transition
+    @service = Service.find(params['id'])
+    @service.send(@service.aasm.events(@service.aasm.current_state).join)
+    @service.save
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   # GET /services/1/edit

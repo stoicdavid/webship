@@ -20,6 +20,9 @@
                     <br> using <strong>.content.wide-content</strong> for this main container
                 </div>
                 <h5 class="personal-title">Mi información personal</h5>
+                <% roles = resource.roles.map {|role| role.name} %>
+
+                
 
 				<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put,class:"form-horizontal" }) do |f| %>
 				  <%= f.error_notification %>
@@ -27,30 +30,38 @@
 				      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
 				    <% end %>
 
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Rol</label>
+                <div class="col-lg-8">
+
+                <h4 class="personal-title"><%= roles.shift.strip.camelize %></h4>
+                </div>
+            </div>
+
 
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">First name:</label>
+                        <label class="col-lg-2 control-label">Nombre(s):</label>
                         <div class="col-lg-8">
 
-                            <input class="form-control" type="text" value="Alejandra" />
+                          <%= f.input :name, :required => true,label:false, :autofocus => true,input_html:{class:"form-control"} %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Last name:</label>
+                        <label class="col-lg-2 control-label">Apellido Paterno:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="Galvan" />
+                          <%= f.input :last_name1, :required => true,label:false, :autofocus => true,input_html:{class:"form-control"} %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Company:</label>
+                        <label class="col-lg-2 control-label">Apellido Materno:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="Design Co." />
+                          <%= f.input :last_name2, :required => true,label:false, :autofocus => true,input_html:{class:"form-control"} %>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2 control-label">* Email:</label>
                         <div class="col-lg-8">
-						<%= f.input :email, :required => true,label:false, :autofocus => true,input_html:{class:"form-control"} %>
+              						<%= f.input :email, :required => true,label:false, :autofocus => true,input_html:{class:"form-control"} %>
                         </div>
                     </div>
                     <div class="form-group">
@@ -75,22 +86,22 @@
 				    
 
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Password:</label>
+                        <label class="col-lg-2 control-label">Password Nuevo:</label>
                         <div class="col-lg-8">
-							<%= f.input :password, :autocomplete => "off",label:false,placeholder: "leave it blank if you don't want to change it", :required => false,input_html: {class:"form-control"} %>
+							<%= f.input :password, :autocomplete => "off",label:false,placeholder: "déjalo en blanco si no lo quieres cambiar", :required => false,input_html: {class:"form-control"} %>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Confirm password:</label>
+                        <label class="col-lg-2 control-label">Confirma password nuevo:</label>
                         <div class="col-lg-8">
 							<%= f.input :password_confirmation,label:false, :required => false,input_html:{class:"form-control"} %>
                         </div>
                     </div>
 					
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">* Current Password:</label>
+                        <label class="col-lg-2 control-label">* Password actual:</label>
                         <div class="col-lg-8">
-				    <%= f.input :current_password, label:false,placeholder: "we need your current password to confirm your changes", :required => true,input_html:{class:"form-control"} %>												
+				    <%= f.input :current_password, label:false,placeholder: "necesitamos tu password actual para confirmar los cambios", :required => true,input_html:{class:"form-control"} %>												
                         </div>
                     </div>
 					
