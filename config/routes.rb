@@ -31,6 +31,7 @@ Webship::Application.routes.draw do
         delete 'sessions' => 'sessions#destroy', :as => 'logout'
       end
         get 'services' => 'services#index', :as => 'services'
+        put 'services/:id/transition' => 'services#transition', :as => 'transition'
     end
   end
   

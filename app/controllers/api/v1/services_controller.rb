@@ -29,6 +29,18 @@ class Api::V1::ServicesController < ApplicationController
   def destroy
     respond_with Service.destroy(params[:id])
   end
+
+  def transition
+    @service = Service.find(params['id'])
+    @service.send(@service.aasm.events(@service.aasm.current_state).join)
+    @service.save    
+  rescue ActiveRecord::RecordNotFound
+    render :status => 404,
+           :json => { :success => false,
+                      :info => 'Not Found',
+                      :data => {} }
+
+  end
   
   def authenticate_with_http_token
     auth_header = request.headers['Authorization'].to_s
